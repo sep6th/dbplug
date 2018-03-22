@@ -19,7 +19,6 @@ public class DBConnection {
 
 	private ComboPooledDataSource cpds = null;
 	private Connection con = null;
-	private Boolean flag = null;
 	
 	public DBConnection() {
 		super();
@@ -28,10 +27,8 @@ public class DBConnection {
 	public DBConnection(Map<String, String> baseMap, Map<String, Integer> subJoinMap){
 		if(baseMap.get("connType").equals("1")) {
 			initC3p0ConnPool(baseMap, subJoinMap);
-			flag = false;
 		}else {
 			initConnection(baseMap);
-			flag = true;
 		}
 	}
 
@@ -101,15 +98,5 @@ public class DBConnection {
 	public Connection getConnection(){
 		return con;
 	}
-	
-	/**
-	 * 用于区分是JDBC 或  C3P0，是判断是否关闭连接的依据。
-	 * C3P0 pool是连接池, 如果关闭就会使连接数减少。
-	 * @Author  liuzy
-	 * @Date  2018年3月22日 上午7:51:33
-	 */
-	public Boolean getType(){
-		return flag;
-	}
-	
+		
 }
