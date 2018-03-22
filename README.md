@@ -16,26 +16,26 @@
   Source source = sourceSrv.queryById(sourceId);
  
   Map<String, String> baseMap = new HashMap<String, String>();
-	baseMap.put("driverClass", source.getDriver());
-	baseMap.put("jdbcUrl", source.getUrl());
-	baseMap.put("user", source.getUsername());
-	baseMap.put("password", source.getPassword());
-	baseMap.put("connType", String.valueOf(source.getConnType()));
+  baseMap.put("driverClass", source.getDriver());
+  baseMap.put("jdbcUrl", source.getUrl());
+  baseMap.put("user", source.getUsername());
+  baseMap.put("password", source.getPassword());
+  baseMap.put("connType", String.valueOf(source.getConnType()));
 		
-	Map<String, Integer> subJoinMap = new HashMap<String, Integer>();
-	subJoinMap.put("initialPoolSize", source.getCountNum());
-	subJoinMap.put("minPoolSize", source.getMinConnum());
-	subJoinMap.put("maxPoolSize", source.getMaxConnum());
-	subJoinMap.put("acquireIncrement", source.getConnCircle());
-	subJoinMap.put("idleConnectionTestPeriod", source.getFreeTime());
-	subJoinMap.put("checkoutTimeout", source.getOutTime());
+  Map<String, Integer> subJoinMap = new HashMap<String, Integer>();
+  subJoinMap.put("initialPoolSize", source.getCountNum());
+  subJoinMap.put("minPoolSize", source.getMinConnum());
+  subJoinMap.put("maxPoolSize", source.getMaxConnum());
+  subJoinMap.put("acquireIncrement", source.getConnCircle());
+  subJoinMap.put("idleConnectionTestPeriod", source.getFreeTime());
+  subJoinMap.put("checkoutTimeout", source.getOutTime());
 	
-	DBPlugUtil dbplug = new DBPlugUtil(baseMap, subJoinMap);
-	/**
-	 * 定义sql，作为方法参数传入
-	 */
-	String sql = "select "+resource.getColumns()+" from "+ resource.getTableName();
-	Result result = dbplug.queryList(sql);
+  DBPlugUtil dbplug = new DBPlugUtil(baseMap, subJoinMap);
+  /**
+   * 定义sql，作为方法参数传入
+   */
+  String sql = "select "+resource.getColumns()+" from "+ resource.getTableName();
+  Result result = dbplug.queryList(sql);
 	
 ```
     
