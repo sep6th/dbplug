@@ -7,31 +7,31 @@
 例子：
 
 ```
+   //第一步：
+   public class DBPlugSource extends DBSource {}
+   
+   //第二步：
+
    /**
-    * 注意：map的key不能有误，且确保所有的key都放入map中。
-    * baseMap ：基本属性；
-    * subJoinMap ：c3p0的附加属性；
-    * 
+    *
     * 其中：connType：1：c3p0 pool；2：jdbc
     */
   Source source = sourceSrv.queryById(sourceId);
- 
-  Map<String, String> baseMap = new HashMap<String, String>();
-  baseMap.put("driverClass", source.getDriver());
-  baseMap.put("jdbcUrl", source.getUrl());
-  baseMap.put("user", source.getUsername());
-  baseMap.put("password", source.getPassword());
-  baseMap.put("connType", String.valueOf(source.getConnType()));
-		
-  Map<String, Integer> subJoinMap = new HashMap<String, Integer>();
-  subJoinMap.put("initialPoolSize", source.getCountNum());
-  subJoinMap.put("minPoolSize", source.getMinConnum());
-  subJoinMap.put("maxPoolSize", source.getMaxConnum());
-  subJoinMap.put("acquireIncrement", source.getConnCircle());
-  subJoinMap.put("idleConnectionTestPeriod", source.getFreeTime());
-  subJoinMap.put("checkoutTimeout", source.getOutTime());
-	
-  DBPlugUtil dbplug = new DBPlugUtil(baseMap, subJoinMap);
+  
+  DBPlugSource dbpsource = new DBPlugSource();
+  dbpsource.setDriverClass(source.getDriver());
+  dbpsource.setJdbcUrl(source.getUrl());
+  dbpsource.setUser(source.getUsername());
+  dbpsource.setPassword(source.getPassword());
+  dbpsource.setConnType(source.getConnType());
+  dbpsource.setInitialPoolSize(source.getCountNum());
+  dbpsource.setMinPoolSize(source.getMinConnum());
+  dbpsource.setMaxPoolSize(source.getMaxConnum());
+  dbpsource.setAcquireIncrement(source.getConnCircle());
+  dbpsource.setIdleConnectionTestPeriod(source.getFreeTime());
+  dbpsource.setCheckoutTimeout(source.getOutTime());
+
+  DBPlugUtil dbplug = new DBPlugUtil(dbpsource);
   /**
    * 定义sql，作为方法参数传入
    */
