@@ -25,8 +25,8 @@ public class DBPlugUtil {
 	 * 构造函数
 	 * @param dbSource
 	 */
-	public DBPlugUtil(Map<String, String> baseMap, Map<String, Integer> subJoinMap){
-		dbconn = new DBConnection(baseMap, subJoinMap);
+	public DBPlugUtil(DBSource source){
+		dbconn = new DBConnection(source);
 	}
 	
 	public DBPlugUtil() {
@@ -39,16 +39,16 @@ public class DBPlugUtil {
 
 	/**
 	 * 测试连接
-	 * mysql、oracle、sqlServer 通用
 	 * 
 	 */
-	public static Result testConn(Map<String, String> baseMap, Map<String, Integer> subJoinMap) {
+	public static Result testConn(DBSource source) {
 		Result result = null;
 		DBConnection conTemp = new DBConnection();
-		if(baseMap.get("connType").equals("1")) {
-			result = conTemp.initC3p0ConnPool(baseMap, subJoinMap);
+		Integer onnType = source.getConnType();
+		if(onnType != null && onnType == 1) {
+			result = conTemp.initC3p0ConnPool(source);
 		}else {
-			result = conTemp.initConnection(baseMap);
+			result = conTemp.initConnection(source);
 		}
 		Connection conn = conTemp.getConnection();
 		//关闭数据库连接 
